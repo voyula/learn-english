@@ -1,6 +1,8 @@
 # 👨‍🏫 learn-english
 learn-english
 
+[![Build Status][ico-travis]][link-travis]
+[![License][ico-license]][link-license]
 
 ### 📜 Standards
 

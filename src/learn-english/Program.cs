@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Finisar.SQLite;
 
 namespace learn_english
 {
@@ -9,45 +10,24 @@ namespace learn_english
     {
         static void Main(string[] args)
         {
-            Dictionary<string, string> letters = new Dictionary<string, string> {
-                { "a", "ey" },
-                { "b", "bi" },
-                { "c", "si" },
-                { "d", "di" },
-                { "e", "i" },
-                { "f", "ef" },
-                { "g", "ci" },
-                { "h", "eyç" },
-                { "i", "ay" },
-                { "j", "cey" },
-                { "k", "key" },
-                { "l", "el" },
-                { "m", "em" },
-                { "n", "en" },
-                { "o", "ouğ" },
-                { "p", "pi" },
-                { "q", "küuğ" },
-                { "r", "ağr" },
-                { "s", "es" },
-                { "t", "ti" },
-                { "u", "yuğ" },
-                { "v", "vi" },
-                { "w", "dabılyuğ" },
-                { "x", "ekz" },
-                { "y", "vay" },
-                { "z", "zed" },
-            };
+            SQLiteConnection sqlite_conn = new SQLiteConnection("Data Source=db.sqlite3;Version=3;Compress=True;");
+            sqlite_conn.Open();
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+
             Console.Title = "learn-english";
             Console.WriteLine("Harflerin Türkçe okunuşunu yazınız.");
             Console.ReadKey();
             Console.Clear();
 
+            sqlite_cmd = sqlite_conn.CreateCommand(); 
+            sqlite_cmd.CommandText = "SELECT * FROM letters ORDER BY RANDOM() LIMIT 1";
             while (true)
             {
-                Random rand = new Random();
-                var randomEntry = letters.ElementAt(rand.Next(0, letters.Count));
-                String question = randomEntry.Key;
-                String answer = randomEntry.Value;
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                sqlite_datareader.Read();
+                String question = (String) sqlite_datareader["question"];
+                String answer = (String) sqlite_datareader["answer"];
 
                 Console.WriteLine(question);
                 String stdin = Console.ReadLine();

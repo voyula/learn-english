@@ -1,5 +1,6 @@
 # 👨‍🏫 learn-english
-Learn English
+
+Has contains English tests.
 
 [![Build Status][ico-travis]][link-travis]
 [![License][ico-license]][link-license]

@@ -1,5 +1,5 @@
 # 👨‍🏫 learn-english
-learn-english
+Learn English
 
 [![Build Status][ico-travis]][link-travis]
 [![License][ico-license]][link-license]

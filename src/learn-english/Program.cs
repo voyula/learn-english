@@ -8,7 +8,7 @@ namespace learn_english
 {
     class Program
     {
-        enum Secenekler
+        enum Options
         {
             LETTERS = 1,
             KEYWORDS = 2
@@ -22,7 +22,7 @@ namespace learn_english
             Console.WriteLine("2 - KELİMELERİN ANLAMLARI");
             Console.WriteLine("**************************");
             int stdinMode = int.Parse(Console.ReadLine());
-            if (stdinMode == (int)Secenekler.LETTERS)
+            if (stdinMode == (int)Options.LETTERS)
             {
                 mode = 1;
             }

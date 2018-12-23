@@ -1,6 +1,6 @@
 # 👨‍🏫 learn-english
 
-Has contains English tests.
+Has contains English question tests.
 
 [![Build Status][ico-travis]][link-travis]
 [![License][ico-license]][link-license]

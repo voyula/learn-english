@@ -11,24 +11,36 @@ namespace learn_english
         enum Options
         {
             LETTERS = 1,
-            KEYWORDS = 2
+            NUMBERS = 2,
+            KEYWORDS = 3
         }
         static void Main(string[] args)
         {
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+
             int mode;
             Console.Title = "learn-english";
             Console.WriteLine("**************************");
             Console.WriteLine("1 - HARFLERİN OKUNUŞU");
-            Console.WriteLine("2 - KELİMELERİN ANLAMLARI");
+            Console.WriteLine("2 - SAYILAR");
+            Console.WriteLine("3 - KELİMELERİN ANLAMLARI");
             Console.WriteLine("**************************");
             int stdinMode = int.Parse(Console.ReadLine());
-            if (stdinMode == (int)Options.LETTERS)
+            switch (stdinMode)
             {
-                mode = 1;
-            }
-            else
-            {
-                mode = 2;
+                case (int)Options.LETTERS:
+                    mode = 1;
+                    break;
+                case (int)Options.NUMBERS:
+                    mode = 2;
+                    break;
+                case (int)Options.KEYWORDS:
+                    mode = 3;
+                    break;
+                default:
+                    mode = 1;
+                    break;
             }
             Console.Clear();
 
@@ -44,7 +56,12 @@ namespace learn_english
                 sqlite_cmd.CommandText = "SELECT * FROM letters ORDER BY RANDOM() LIMIT 1";
                 Console.WriteLine("Harflerin Türkçe okunuşunu yazınız.");
             }
-            else
+            else if (mode == 2)
+            {
+                sqlite_cmd.CommandText = "SELECT * FROM numbers ORDER BY RANDOM() LIMIT 1";
+                Console.WriteLine("Sayıların ingilizce okunuşunu yazınız.");
+            }
+            else if (mode == 3)
             {
                 sqlite_cmd.CommandText = "SELECT * FROM keywords ORDER BY RANDOM() LIMIT 1";
                 Console.WriteLine("Harflerin Türkçe kelime anlamlarını yazınız.");

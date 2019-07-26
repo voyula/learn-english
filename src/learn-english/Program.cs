@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Finisar.SQLite;
+using System.Data.SQLite;
 
 namespace learn_english
 {
@@ -47,7 +45,6 @@ namespace learn_english
             SQLiteConnection sqlite_conn = new SQLiteConnection("Data Source=db.sqlite3;Version=3;Compress=True;");
             sqlite_conn.Open();
             SQLiteCommand sqlite_cmd;
-            SQLiteDataReader sqlite_datareader;
 
             sqlite_cmd = sqlite_conn.CreateCommand();
 
@@ -69,26 +66,28 @@ namespace learn_english
             Console.ReadKey();
             Console.Clear();
 
-            while (true)
+            using (SQLiteDataReader reader = sqlite_cmd.ExecuteReader())
             {
-                sqlite_datareader = sqlite_cmd.ExecuteReader();
-                sqlite_datareader.Read();
-                String question = (String)sqlite_datareader["question"];
-                String answer = (String)sqlite_datareader["answer"];
-
-            scope:
-                Console.WriteLine(question);
-                String stdin = Console.ReadLine().ToLower();
-                if (stdin != answer)
+                while (true)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Yanlış... Cevap: " + answer);
-                    Console.ResetColor();
-                    Console.ReadKey();
+                    reader.Read();
+                    String question = (String)reader["question"];
+                    String answer = (String)reader["answer"];
+
+                scope:
+                    Console.WriteLine(question);
+                    String stdin = Console.ReadLine().ToLower();
+                    if (stdin != answer)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Yanlış... Cevap: " + answer);
+                        Console.ResetColor();
+                        Console.ReadKey();
+                        Console.Clear();
+                        goto scope;
+                    }
                     Console.Clear();
-                    goto scope;
                 }
-                Console.Clear();
             }
         }
     }

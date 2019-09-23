@@ -78,26 +78,30 @@ namespace learn_english
                     if (mode == (int)Options.LETTERS)
                     {
                         IQueryable<letters> rows = db.letters.OrderBy(x => Guid.NewGuid()).Take(1);
-                        question = rows.First().question;
-                        answer = rows.First().answer;
+                        var first_row = rows.First<letters>();
+                        question = first_row.question;
+                        answer = first_row.answer;
                     }
                     else if (mode == (int)Options.NUMBERS)
                     {
                         IQueryable<numbers> rows = db.numbers.OrderBy(x => Guid.NewGuid()).Take(1);
-                        question = rows.First().question;
-                        answer = rows.First().answer;
+                        var first_row = rows.First<numbers>();
+                        question = first_row.question;
+                        answer = first_row.answer;
                     }
                     else if (mode == (int)Options.KEYWORDS)
                     {
                         IQueryable<keywords> rows = db.keywords.OrderBy(x => Guid.NewGuid()).Take(1);
-                        question = rows.First().question;
-                        answer = rows.First().answer;
+                        var first_row = rows.First<keywords>();
+                        question = first_row.question;
+                        answer = first_row.answer;
                     }
                     else if (mode == (int)Options.TIME)
                     {
                         IQueryable<time> rows = db.time.OrderBy(x => Guid.NewGuid()).Take(1);
-                        question = rows.First().question;
-                        answer = rows.First().answer;
+                        var first_row = rows.First<time>();
+                        question = first_row.question;
+                        answer = first_row.answer;
                     }
 
                     Console.WriteLine(question);

@@ -103,15 +103,17 @@ namespace learn_english
                         question = first_row.question;
                         answer = first_row.answer;
                     }
-
+                    scope:
                     Console.WriteLine(question);
                     String stdin = Console.ReadLine().ToLower();
-                    if (stdin != answer)
+                    if (stdin != answer.ToLower())
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Yanlış... Cevap: " + answer);
                         Console.ResetColor();
                         Console.ReadKey();
+                        Console.Clear();
+                        goto scope;
                     }
                     Console.Clear();
                 }
